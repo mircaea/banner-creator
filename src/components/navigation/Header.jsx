@@ -23,11 +23,9 @@ function Header() {
         <NavLink to={RoutesType.HOME} end={true} className="LinkHeader">
           Home
         </NavLink>
-        {!currentUser && (
-          <NavLink to={RoutesType.AUTHENTICATE} className="LinkHeader">
-            Sign in
-          </NavLink>
-        )}
+        <NavLink to={RoutesType.AUTHENTICATE} className="LinkHeader">
+          Sign in
+        </NavLink>
         <NavLink to={RoutesType.DASHBOARD} className="LinkHeader">
           Dashboard
         </NavLink>

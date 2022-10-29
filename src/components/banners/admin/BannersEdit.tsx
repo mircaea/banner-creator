@@ -7,10 +7,11 @@ import { BannerType } from "../../../firebase/types";
 
 interface BannerEditProps {
   item: BannerType;
+  handleDelete: () => void;
   handleDeselect: () => void;
 }
 
-function BannersEdit({ item, handleDeselect }: BannerEditProps) {
+function BannersEdit({ item, handleDelete, handleDeselect }: BannerEditProps) {
   const { create_banner, update_banner, upload_file } = useAppContext();
   const [text, setText] = useState("");
   const [file, setFile] = useState<any>();
@@ -25,7 +26,6 @@ function BannersEdit({ item, handleDeselect }: BannerEditProps) {
     setText(ev.target.value);
   };
   const handleSave = async () => {
-    // storage bucket
     let _url = item?.url;
     if (file) {
       const resp = await upload_file(file);
@@ -39,7 +39,7 @@ function BannersEdit({ item, handleDeselect }: BannerEditProps) {
     if (item.id) {
       await update_banner({ ...item, text, url: _url });
     } else {
-      await create_banner({ text, url: "" });
+      await create_banner({ text, url: _url });
     } // eh
 
     handleDeselect();
@@ -84,6 +84,11 @@ function BannersEdit({ item, handleDeselect }: BannerEditProps) {
           <Button variant="outlined" color="primary" onClick={handleDeselect}>
             Cancel
           </Button>
+          {item?.id && (
+            <Button variant="outlined" color="error" onClick={handleDelete}>
+              Delete this banner
+            </Button>
+          )}
         </Stack>
       </Stack>
     </>

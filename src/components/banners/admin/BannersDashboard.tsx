@@ -7,9 +7,7 @@ import { useAppContext } from "../../../context/AppContext";
 import BannerPreview from "../preview/BannerPreview";
 
 function BannersDashboard() {
-  const { banners, currentUser } = useAppContext();
-  // still testing for currentUser if this component ever gets used
-  // in a Route that is not behind a RequireAuth component
+  const { banners, delete_banner } = useAppContext();
   const [selected, setSelected] = useState<BannerType>();
 
   const toggleCreateNew = () => toggleSelect(EMPTY_BANNER);
@@ -18,12 +16,17 @@ function BannersDashboard() {
 
   const pool = useMemo(
     () =>
-      banners && currentUser && selected
+      banners && selected
         ? banners.filter((el) => el.id === selected?.id)
         : banners,
-    [currentUser, selected, banners]
+    [selected, banners]
   );
 
+  const handleDelete = async () => {
+    if (!selected || !selected.id) return;
+    await delete_banner(selected);
+    handleDeselect();
+  };
   const handleDeselect = () => setSelected(undefined);
 
   return (
@@ -38,7 +41,11 @@ function BannersDashboard() {
           <BannersList pool={pool} handleSelect={toggleSelect} />
         ) : null}
         {selected && (
-          <BannersEdit item={selected} handleDeselect={handleDeselect} />
+          <BannersEdit
+            item={selected}
+            handleDelete={handleDelete}
+            handleDeselect={handleDeselect}
+          />
         )}
       </Grid>
       <Grid item xs>

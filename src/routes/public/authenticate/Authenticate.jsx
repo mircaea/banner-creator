@@ -12,30 +12,26 @@ import {
 
 import { Button, TextField } from "@mui/material";
 import SignedIn from "../../../components/authenticate/SignedIn";
-import { RoutesType } from "../../../firebase/types";
 
 const def_msg = "Oups! Something went wrong. Try again later.";
 
 function Authenticate() {
   const navigate = useNavigate();
   const location = useLocation();
-  const redirectTo = location.state?.from?.pathname || RoutesType.DASHBOARD;
+  const redirectTo = location.state?.from?.pathname;
 
   const { currentUser } = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const resetInputs = () => {
-    setEmail("");
-    setPassword("");
-    setError("");
-  };
   const signUp = () => {
     sign_up(
       email,
       password,
-      () => resetInputs(),
+      () => {
+        if (redirectTo) navigate(redirectTo);
+      },
       (error) => setError(error?.message ?? def_msg)
     );
   };
@@ -53,15 +49,16 @@ function Authenticate() {
       email,
       password,
       () => {
-        navigate(redirectTo);
+        if (redirectTo) navigate(redirectTo);
       },
       (error) => setError(error?.message ?? def_msg)
     );
   };
   const googleSignIn = () => {
-    // restrict user from accesing the page
     google_sign_in(
-      () => navigate(redirectTo),
+      () => {
+        if (redirectTo) navigate(redirectTo);
+      },
       (error) => setError(error?.message ?? def_msg)
     );
   };

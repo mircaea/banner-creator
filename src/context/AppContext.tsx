@@ -8,14 +8,14 @@ import {
   updateBanner,
 } from "../firebase/data";
 import { BannerType } from "../firebase/types";
-import { uploadFile } from "../firebase/storage";
+import { deleteFile, uploadFile } from "../firebase/storage";
 
 interface AppContextType {
   currentUser: User | undefined;
   banners: BannerType[];
   create_banner: (request: BannerType) => Promise<BannerType | undefined>;
   update_banner: (request: BannerType) => Promise<void>;
-  delete_banner: (id: string) => Promise<void>;
+  delete_banner: (item: BannerType) => Promise<void>;
   upload_file: (file: File) => Promise<string>;
 }
 
@@ -117,11 +117,13 @@ export function ContextProvider({ children }: { children: ReactNode }) {
       console.log(error);
     }
   };
-  const delete_banner = async (id: string) => {
-    if (!id) return;
+  const delete_banner = async (item: BannerType) => {
+    if (!item.id) return;
     try {
-      const result = await deleteDocByPath(`banners/${id}`);
-      if (result === undefined) deleteBannerFromContextState(id);
+      await deleteDocByPath(`banners/${item.id}`);
+      if (item.url) await deleteFile(item.url);
+      // update local state:
+      deleteBannerFromContextState(item.id);
     } catch (error) {
       console.log(error);
     }
