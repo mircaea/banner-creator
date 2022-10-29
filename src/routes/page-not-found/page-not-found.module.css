@@ -1,0 +1,21 @@
+.Outer {
+  padding: 67px 0 0 0;
+  width: 100%;
+  text-align: center;
+  font-size: var(--fs-3);
+}
+
+.ImageOuter {
+  width: 34%;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 900px) {
+  .Outer {
+    padding: 27px 0 0 0;
+  }
+
+  .ImageOuter {
+    width: 78%;
+  }
+}

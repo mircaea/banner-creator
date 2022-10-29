@@ -1,0 +1,14 @@
+.List {
+  margin: 20px 0;
+}
+.ListElement {
+  padding: 2px 12px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+.ListElement:nth-child(odd) {
+  background-color: var(--color-yellow);
+}
+.ListElement:hover {
+  background-color: var(--color-light);
+}

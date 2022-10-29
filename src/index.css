@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+* {
+  box-sizing: border-box;
+  transition: 150ms;
+}
+ul {
+  display: block;
+  list-style-type: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0;
+}
+p {
+  display: block;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto;
+  padding: 10px 20px;
+  border: var(--border-discret);
+  border-radius: var(--border-radius-big);
+  background-color: var(--color-dark);
+}
+.TopMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+.LinkHeader {
+  color: white;
+  text-decoration: none;
+}
+.LinkHeader:hover {
+  color: var(--color-yellow);
+  text-decoration: underline;
+}
+.LinkHeader.active {
+  color: var(--color-yellow);
+  text-decoration: underline;
+}
+
+.LayoutOutlet {
+  margin: 54px 0;
+  padding: 20px;
+}
+
+.FullWidthBottomBorder {
+  width: 100%;
+  height: 0px;
+  margin: 16px 0;
+  border-bottom: var(--border-discret);
+}
+
+:root {
+  --input-color: white;
+  --input-placeholder-color: rgb(171, 171, 171);
+  --color-dark: #282c34;
+  --color-light: #a1a1a1;
+  --color-yellow: blanchedalmond;
+
+  --text-light: #9a9a9a;
+  --text-normal: #272727;
+  --text-dark: #000000;
+
+  --box-shadow_light: 1px 1px 1px 1px var(--color-light);
+  --box-shadow_dark: 1px 1px 1px 1px var(--color-dark);
+
+  --border-radius: 3px;
+  --border-radius-big: 7px;
+
+  --border-discret: 1px solid var(--color-light);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Logo {
+    width: auto;
+    height: 3.5rem;
+    animation: App-logo-spin infinite 7s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
